@@ -34,6 +34,8 @@ describe("Application", ()=>{
         target: { value: "Lydia Miller-Jones" }
       });
       fireEvent.click(getByAltText(appointment, "Sylvia Palmer"));
+    })
+    act(()=>{
       fireEvent.click(getByText(appointment, "Save"));
     })
     console.log(prettyDOM(appointment));    

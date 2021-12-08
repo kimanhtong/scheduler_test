@@ -87,7 +87,6 @@ export default {
         student: 'Lydia Miller-Jones',
         interviewer: 1
       }
-      console.log(fixtures.appointments[1]);
       return Promise.resolve({
         status: 204,
         statusText: "No Content"
