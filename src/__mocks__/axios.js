@@ -83,16 +83,36 @@ export default {
   }),
   put: jest.fn((url) => {
     if (url === `/api/appointments/1`) {
-      fixtures.appointments[1].interview = {
-        student: 'Lydia Miller-Jones',
-        interviewer: 1
+      if (fixtures.appointments['1'].interview !== null) {
+        // "Edit" case
+        fixtures.appointments['1'].interview = {
+          student: 'Black Smith',
+          interviewer: 2,
+        }
+        //fixtures.days[0].spots -= 0;
+      } else {
+        // "Add" case
+        fixtures.appointments['1'].interview = {
+          student: 'Lydia Miller-Jones',
+          interviewer: 1
+        }
+       // fixtures.days[0].spots -= 1;
       }
       return Promise.resolve({
         status: 204,
         statusText: "No Content"
       });
     }
-
   }),
+  delete: jest.fn((url) => {
+    if (url === `/api/appointments/2`) {
+      fixtures.appointments['2'].interview = null;
+     // fixtures.days[0].spots += 1;
+      return Promise.resolve({
+        status: 204,
+        statusText: "No Content"
+      });
+    }
+  })
  
 }

@@ -19,6 +19,8 @@ export default function useApplicationData() {
     })},[]);
 
   function bookInterview(id, interview) {
+    const freeSpotChanged = {...state}.appointments[id].interview === null ? -1 : 0;
+
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -27,11 +29,10 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
-    const freeSpotChanged = -1;
 
     const saveToServer = axios
       .put(`/api/appointments/${id}`, appointment)
-      .then(res => console.log(`Received status code (adding): ${res.status}`))
+      .then(res => console.log(`Received status code ${freeSpotChanged === -1 ? "(adding)" : "(editing)"}: ${res.status}`))
       .then (() => {
         const days = updateSpots(id, freeSpotChanged);
         setState({
